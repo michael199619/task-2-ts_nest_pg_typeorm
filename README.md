@@ -16,13 +16,14 @@ $ yarn start
 ```
 Server started at http://localhost:3000/
 
-## start
+## start docker
 
 ```bash
-$ yarn build
-$ yarn start 
+$ cp .env.example .env
+$ docker-compose up 
 ```
 Server started at http://localhost:3000/
+Apidoc started at http://localhost:5000/
 
 ## apidoc
 
