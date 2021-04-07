@@ -54,7 +54,7 @@ describe('Api', () => {
             .get('/api/wallets')
             .expect(200)
             .end((err, res) => {
-                const wallet = res.body.find(e => e.sum)
+                const wallet = res.body.find(e => e.sum > 100)
                 walletFromId = wallet.id;
                 currencyId = wallet.currencyId;
                 if (err) return done(err);

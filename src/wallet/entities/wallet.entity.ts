@@ -11,6 +11,8 @@ import { Exclude } from 'class-transformer';
 
 import { BaseEntity } from '../../shared/entities';
 import {User} from "../../users/entities";
+import {Currency} from "./currency.entity";
+import {LogWallet} from "./logWallet.entity";
 
 @Entity('wallet')
 export class Wallet extends BaseEntity {
@@ -32,6 +34,8 @@ export class Wallet extends BaseEntity {
     type: 'int', unsigned: true, nullable: false
   })
   public currencyId: number;
+  currency: Currency;
+  logs: LogWallet;
 
   @Column({
     type: 'int', unsigned: true, nullable: false
@@ -42,6 +46,9 @@ export class Wallet extends BaseEntity {
     return {
       id: this.id,
       sum: this.sum,
+      currency: this.currency,
+      userId: this.userId,
+      logs: this.logs,
       currencyId: this.currencyId,
       createdAt: this.createdAt
     };

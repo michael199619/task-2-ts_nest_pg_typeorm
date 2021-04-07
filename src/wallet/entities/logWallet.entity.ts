@@ -1,24 +1,23 @@
 import {
     Entity,
     Column,
-    ManyToOne,
-    OneToMany,
-    OneToOne,
-    JoinColumn,
     PrimaryGeneratedColumn,
 } from 'typeorm';
 import {BaseEntity} from '../../shared/entities';
+import {Wallet} from './wallet.entity';
 
-@Entity('logWallet')
+@Entity('logwallet')
 export class LogWallet extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
+    walletFrom: Wallet;
     @Column({
         type: 'int', unsigned: true, nullable: false
     })
     public walletToId: number;
 
+    walletTo: Wallet;
     @Column({
         type: 'int', unsigned: true, nullable: false
     })
@@ -56,6 +55,8 @@ export class LogWallet extends BaseEntity {
             id: this.id,
             sum: this.sum,
             status: this.status,
+            walletFrom: this.walletFrom,
+            walletTo: this.walletTo,
             walletFromId: this.walletFromId,
             walletToId: this.walletToId,
             commission: this.commission,

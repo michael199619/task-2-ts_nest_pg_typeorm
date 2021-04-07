@@ -21,6 +21,19 @@ export class UsersController {
     return await this.usersService.getUsers();
   }
 
+
+  /**
+   * @api {get} /api/users/:id Get user
+   * @apiName GetUsers
+   * @apiGroup user
+   *
+   * @apiSuccess {object[]} users
+   */
+  @Get(':id')
+  async getUserById(@ReqData('id') id: number) {
+    return await this.usersService.getUserById(id);
+  }
+
   /**
    * @api {post} /api/users create user
    * @apiName createUser

@@ -27,8 +27,14 @@ export class WalletService {
     }
 
     public async getWalletsByIdUser(userId: number): Promise<Wallet[]> {
-        const users = this.wRepo.find({userId})
-        return users;
+        const wallets = await this.entityManager.createQueryBuilder(Wallet, 'wallet')
+            .innerJoinAndMapOne('wallet.currency', 'currency', 'currency', 'wallet.currencyId = currency.id')
+            .leftJoinAndMapMany('wallet.logs', 'logwallet', 'logwallet', 'logwallet.walletFromId = wallet.id or logwallet.walletToId = wallet.id')
+            .where('wallet.userId = :userId', {userId})
+            .orderBy('wallet.id')
+            .getMany();
+
+        return wallets;
     }
 
     public async createWallet(wallet: WalletDto): Promise<Wallet> {
