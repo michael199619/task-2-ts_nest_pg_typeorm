@@ -7,6 +7,7 @@ import {configService} from '../src/config';
 import {UsersModule} from '../src/users/users.module';
 import {WalletModule} from '../src/wallet/wallet.module';
 import * as request from 'supertest';
+import seed from '../src/utils/seed';
 
 describe('Api', () => {
     let usersController: UsersController;
@@ -24,6 +25,7 @@ describe('Api', () => {
 
         app = moduleRef.createNestApplication();
         await app.init();
+        await seed();
     });
 
     let userId: number;

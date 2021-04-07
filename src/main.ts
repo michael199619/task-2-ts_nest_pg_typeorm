@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { configService } from './config';
+import seed from './utils/seed';
 
 export async function bootstrap(port: number, hostname?: string) {
   const app = await NestFactory.create(AppModule, {
@@ -24,6 +25,7 @@ export async function bootstrap(port: number, hostname?: string) {
   );
 
   await app.listen(port, hostname);
+  await seed();
 
   console.log(`Application is running on: ${await app.getUrl()}`);
 }

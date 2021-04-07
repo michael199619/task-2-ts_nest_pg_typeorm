@@ -28,8 +28,6 @@ export class ConfigService {
             synchronize: true,
         };
     }
-
-
 }
 
 export const configService = new ConfigService();

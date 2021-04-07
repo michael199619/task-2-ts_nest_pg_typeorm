@@ -16,6 +16,14 @@ $ yarn start
 ```
 Server started at http://localhost:3000/
 
+## start
+
+```bash
+$ yarn build
+$ yarn start 
+```
+Server started at http://localhost:3000/
+
 ## apidoc
 
 ```bash

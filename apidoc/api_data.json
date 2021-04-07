@@ -23,6 +23,29 @@
     "groupTitle": "user"
   },
   {
+    "type": "get",
+    "url": "/api/users/:id",
+    "title": "Get user",
+    "name": "GetUsers",
+    "group": "user",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "object[]",
+            "optional": false,
+            "field": "users",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/users/users.controller.ts",
+    "groupTitle": "user"
+  },
+  {
     "type": "post",
     "url": "/api/users",
     "title": "create user",
@@ -53,9 +76,16 @@
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "-",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
             "type": "number",
             "optional": false,
-            "field": "id",
+            "field": "-.id",
             "description": ""
           }
         ]
@@ -87,6 +117,29 @@
     "version": "0.0.0",
     "filename": "src/users/users.controller.ts",
     "groupTitle": "user"
+  },
+  {
+    "type": "get",
+    "url": "/api/wallets",
+    "title": "Get all wallets",
+    "name": "GetWallets",
+    "group": "wallets",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "object[]",
+            "optional": false,
+            "field": "wallet",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/wallet/wallet.controller.ts",
+    "groupTitle": "wallets"
   },
   {
     "type": "get",
@@ -142,9 +195,16 @@
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "-",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
             "type": "number",
             "optional": false,
-            "field": "id",
+            "field": "-.id",
             "description": ""
           }
         ]
@@ -192,9 +252,16 @@
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "-",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
             "type": "number",
             "optional": false,
-            "field": "id",
+            "field": "-.id",
             "description": ""
           }
         ]

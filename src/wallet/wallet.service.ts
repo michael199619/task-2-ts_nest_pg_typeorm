@@ -82,7 +82,7 @@ export class WalletService {
             await queryRunner.commitTransaction();
         } catch (err) {
             await queryRunner.rollbackTransaction();
-            status = false
+            status = false;
         } finally {
             await queryRunner.release();
             return await this.lRepo.save({walletToId, walletFromId, sum, commission, status});

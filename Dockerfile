@@ -1,12 +1,12 @@
-FROM node:12
+FROM node:12-alpine
 
 RUN mkdir /app
 WORKDIR /app
 
-COPY ./node_modules ./node_modules
-COPY ./src ./src
-COPY ./*.json ./
-COPY ./*.js ./
+COPY .
+
+RUN npm i
+RUN npm run test
 RUN npm run build
 
 CMD npm run start:prod

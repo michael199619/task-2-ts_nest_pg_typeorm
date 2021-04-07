@@ -3,7 +3,7 @@ import {configService} from '../config';
 import {User} from '../users/entities';
 import {Currency, Wallet} from '../wallet/entities';
 
-const bootstrap = async () => {
+export default async () => {
     console.log("[Seed started]");
 
     const connectionManager = new ConnectionManager();
@@ -44,5 +44,3 @@ const bootstrap = async () => {
     await connection.close();
     console.log("[Seed success]");
 };
-
-bootstrap();

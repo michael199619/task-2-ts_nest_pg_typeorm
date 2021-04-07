@@ -5,7 +5,7 @@ services:
     env_file:
       - '.env'
     ports:
-      - 5432:5432
+      - ${POSTGRES_PORT}:5432
     volumes:
       - '${POSTGRES_FILE_PATH}:/var/lib/postgresql/data'
 
@@ -16,11 +16,13 @@ services:
     image: 'apidoc'
     ports:
       - 5000:5000
-      -
+
   api:
     build:
       context: .
       dockerfile: Dockerfile
     image: 'api'
     ports:
-      - 3000:3000
+      - '${APP_PORT}:3000'
+    depends_on:
+      - postgres
