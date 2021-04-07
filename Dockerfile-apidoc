@@ -1,0 +1,12 @@
+FROM node:alpine
+
+RUN mkdir /apidoc
+WORKDIR /apidoc
+
+COPY ./src ./src
+COPY ./package.json ./package.json 
+COPY ./apidoc.json ./apidoc.json 
+
+RUN npm install apidoc serve && npm run apidoc
+
+CMD npm run apidoc:serve

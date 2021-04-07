@@ -1,0 +1,10 @@
+{
+  "name": "technical task №3",
+  "version": "0.0.1",
+  "description": "API documentation",
+  "title": "API Documentation for School backend",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  }
+}
