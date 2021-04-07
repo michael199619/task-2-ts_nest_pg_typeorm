@@ -19,12 +19,13 @@ export class WalletController {
    * @apiParam {object} -
    * @apiParam {string} -.name
    *
-   * @apiSuccess {number} id
+   * @apiSuccess {object} -
+   * @apiSuccess {number} -.id
    */
   @Post('currencyes')
   async createCurrency(@ReqData() currency: CurrencyDto) {
     const {id} = await this.walletsService.createCurrency(currency);
-    return id;
+    return {id};
   }
 
   /**
@@ -42,6 +43,18 @@ export class WalletController {
   }
 
   /**
+   * @api {get} /api/wallets Get all wallets
+   * @apiName GetWallets
+   * @apiGroup wallets
+   *
+   * @apiSuccess {object[]} wallet
+   */
+  @Get('')
+  async getWallets() {
+    return await this.walletsService.getWallets();
+  }
+
+  /**
    * @api {get} /api/wallets/:id Get wallets of user
    * @apiName GetWallets
    * @apiGroup wallets
@@ -49,7 +62,7 @@ export class WalletController {
    * @apiSuccess {object[]} wallet
    */
   @Get(':id')
-  async getUsers(@ReqData('id') id: number) {
+  async getWalletsByIdUser(@ReqData('id') id: number) {
     return await this.walletsService.getWalletsByIdUser(id);
   }
  
@@ -62,12 +75,13 @@ export class WalletController {
    * @apiParam {number} -.currencyId
    * @apiParam {number} -.userId
    *
-   * @apiSuccess {number} id
+   * @apiSuccess {object} -
+   * @apiSuccess {number} -.id
    */
   @Post('')
-  async getCurrentUser(@ReqData() wallet: WalletDto) {
+  async createWallet(@ReqData() wallet: WalletDto) {
     const {id} = await this.walletsService.createWallet(wallet);
-    return id;
+    return {id};
   }
 
   /**

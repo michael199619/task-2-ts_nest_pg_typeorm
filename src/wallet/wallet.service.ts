@@ -35,6 +35,10 @@ export class WalletService {
         return await this.wRepo.save(wallet);
     }
 
+    public async getWallets(): Promise<Wallet[]> {
+        return await this.wRepo.find();
+    }
+
     public async createCurrency(currency: CurrencyDto): Promise<Currency> {
         return await this.cRepo.save(currency);
     }

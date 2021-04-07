@@ -29,12 +29,13 @@ export class UsersController {
    * @apiParam {object} -
    * @apiParam {string} -.name
    *
-   * @apiSuccess {number} id
+   * @apiSuccess {object} -
+   * @apiSuccess {number} -.id
    */
   @Post('')
-  async getCurrentUser(@ReqData() user: UserDTO) {
+  async createUser(@ReqData() user: UserDTO) {
     const {id} = await this.usersService.createUser(user);
-    return id;
+    return {id};
   }
 
   /**

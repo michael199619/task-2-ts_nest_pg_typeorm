@@ -16,9 +16,8 @@ export class Currency extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Exclude()
   @Column({
-    type: 'varchar'
+    type: 'varchar', unique: true
   })
   public name: string;
 
