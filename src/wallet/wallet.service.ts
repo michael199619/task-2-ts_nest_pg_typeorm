@@ -55,7 +55,7 @@ export class WalletService {
         const walletTo = wallets.find(({id}) => id === walletToId);
         const walletFrom = wallets.find(({id}) => id === walletFromId);
 
-        const commission = walletTo.sum / 100 * configService.get('COMMISSION');
+        const commission = sum / 100 * configService.get('COMMISSION');
         walletFrom.sum = walletFrom.sum - commission - sum;
         walletTo.sum = walletTo.sum + sum;
 
@@ -69,6 +69,7 @@ export class WalletService {
 
         try {
             await queryRunner.manager.save([walletFrom, walletTo]);
+            await queryRunner.commitTransaction();
         } catch (err) {
             await queryRunner.rollbackTransaction();
             status = false

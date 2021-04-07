@@ -11,10 +11,12 @@ import {Expose, Transform, Type} from "class-transformer";
 
 export class TransferDto {
     @Expose()
+    @Min(1)
     @IsInt()
     readonly walletFromId: number;
 
     @IsInt()
+    @Min(1)
     @Expose()
     readonly walletToId: number;
 

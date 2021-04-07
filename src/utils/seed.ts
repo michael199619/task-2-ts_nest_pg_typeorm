@@ -14,6 +14,11 @@ const bootstrap = async () => {
     const walletRepository = connection.getRepository(Wallet);
     const currencyRepository = connection.getRepository(Currency);
 
+    if (await userRepository.findOne()) {
+        console.log("[Seed success]");
+        return false;
+    }
+
     console.log("[Creating User started]")
     const users = await userRepository.save([
         {name: 'michael'},

@@ -54,11 +54,11 @@ export class LogWallet extends BaseEntity {
     toJSON() {
         return {
             id: this.id,
-            walletToId: this.walletToId,
-            walletFromId: this.walletFromId,
             sum: this.sum,
-            commission: this.commission,
             status: this.status,
+            walletFromId: this.walletFromId,
+            walletToId: this.walletToId,
+            commission: this.commission,
             createdAt: this.createdAt
         };
     }
