@@ -1,5 +1,7 @@
 # [Article](https://vk.com/@-202627164-the-technical-task-3)
 
+## [Schema of database](https://miro.com/app/board/o9J_lL9MLhc=/)
+
 ## build
 ```bash
 $ git https://github.com/michael199619/task-2-ts_nest_pg_typeorm.git
