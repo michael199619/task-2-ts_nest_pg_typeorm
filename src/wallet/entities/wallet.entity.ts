@@ -37,6 +37,11 @@ export class Wallet extends BaseEntity {
   currency: Currency;
   logs: LogWallet;
 
+  @ManyToOne(() => User, {
+    onDelete: 'CASCADE' // удаляем кошелек привязанный к юзеру, но не лог кошелька
+  })
+  public user: number;
+
   @Column({
     type: 'int', unsigned: true, nullable: false
   })
@@ -48,6 +53,7 @@ export class Wallet extends BaseEntity {
       sum: this.sum,
       currency: this.currency,
       userId: this.userId,
+      user: this.user,
       logs: this.logs,
       currencyId: this.currencyId,
       createdAt: this.createdAt
