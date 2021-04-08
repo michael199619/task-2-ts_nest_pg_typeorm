@@ -9,7 +9,7 @@ import {Like, Repository} from 'typeorm';
 import {Currency, LogWallet, Wallet} from './entities';
 import {WalletDto} from './dto/wallet.dto';
 import {CurrencyDto} from './dto/currency.dto';
-import {configService} from '../config/config.service';
+import {ConfigService} from "@nestjs/config";
 
 @Injectable()
 export class WalletService {
@@ -23,6 +23,7 @@ export class WalletService {
         private readonly lRepo: Repository<LogWallet>,
         @InjectEntityManager()
         private entityManager: EntityManager,
+        private configService: ConfigService
     ) {
     }
 
@@ -65,7 +66,7 @@ export class WalletService {
         const walletTo = wallets.find(({id}) => id === walletToId);
         const walletFrom = wallets.find(({id}) => id === walletFromId);
 
-        const commission = sum / 100 * configService.get('COMMISSION');
+        const commission = sum / 100 * this.configService.get<number>('app.commission');
         walletFrom.sum = walletFrom.sum - commission - sum;
         walletTo.sum = walletTo.sum + sum;
 

@@ -1,33 +1,35 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { configService } from './config';
+import {ValidationPipe} from '@nestjs/common';
+import {NestFactory} from '@nestjs/core';
+import {AppModule} from './app.module';
 import seed from './utils/seed';
+import {ConfigService} from "@nestjs/config";
 
-export async function bootstrap(port: number, hostname?: string) {
-  const app = await NestFactory.create(AppModule, {
-    cors: true,
-    logger: ['debug'],
-  });
+export async function bootstrap() {
+    const app = await NestFactory.create(AppModule, {
+        cors: true,
+        logger: ['debug'],
+    });
 
-  app.enableCors({
-      origin: '*'
-  });
+    app.enableCors({
+        origin: '*'
+    });
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-        transform: true,
-        validateCustomDecorators: true,
-        transformOptions: {
-            excludeExtraneousValues: true
-        }
-    }),
-  );
+    app.useGlobalPipes(
+        new ValidationPipe({
+            transform: true,
+            validateCustomDecorators: true,
+            transformOptions: {
+                excludeExtraneousValues: true
+            }
+        }),
+    );
 
-  await app.listen(port, hostname);
-  await seed();
+    const configService: ConfigService = app.get('ConfigService');
 
-  console.log(`Application is running on: ${await app.getUrl()}`);
+    await app.listen(configService.get<number>('app.port'));
+    await seed();
+
+    console.log(`Application is running on: ${await app.getUrl()}`);
 }
 
-bootstrap(Number(configService.get('APP_PORT')));
+bootstrap();

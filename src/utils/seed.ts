@@ -1,13 +1,18 @@
-import {ConnectionManager} from "typeorm";
-import {configService} from '../config';
+import {ConnectionManager, ConnectionOptions} from "typeorm";
 import {User} from '../users/entities';
 import {Currency, Wallet} from '../wallet/entities';
+import {ConfigService} from "@nestjs/config";
+import {db} from "../config/config.service";
 
 export default async () => {
     console.log("[Seed started]");
 
+    const configService = new ConfigService({
+        db: db()
+    });
+
     const connectionManager = new ConnectionManager();
-    const connection = connectionManager.create(configService.getOrmModuleOptions());
+    const connection = connectionManager.create(configService.get<ConnectionOptions>('db'));
 
     await connection.connect();
     const userRepository = connection.getRepository(User);

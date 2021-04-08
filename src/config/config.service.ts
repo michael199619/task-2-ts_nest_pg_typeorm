@@ -1,33 +1,24 @@
-import {ConnectionOptions} from 'typeorm';
-import * as dotenv from 'dotenv';
-
+import {registerAs} from '@nestjs/config';
 import {UsersEntities} from '../users/entities';
 import {WalletEntities} from '../wallet/entities';
 
-dotenv.config();
+export const app = registerAs('app', () => ({
+    port: process.env.APP_PORT,
+    commission: process.env.COMMISSION
+}));
 
-export class ConfigService {
-    public get(key: string) : any {
-        return process.env[key];
-    }
-
-    public getOrmModuleOptions(): ConnectionOptions {
-        return {
-            type: 'postgres',
-            port: parseInt(this.get('POSTGRES_PORT'), 10),
-            username: this.get('POSTGRES_USER'),
-            database: this.get('POSTGRES_DB'),
-            password: this.get('POSTGRES_PASSWORD'),
-            host: this.get('POSTGRES_HOST'),
-            migrationsRun: false,
-            entities: [
-                ...WalletEntities,
-                ...UsersEntities
-            ],
-            logging: true,
-            synchronize: true,
-        };
-    }
-}
-
-export const configService = new ConfigService();
+export const db = registerAs('db', () => ({
+    type: 'postgres',
+    port: process.env.POSTGRES_PORT,
+    username: process.env.POSTGRES_USER,
+    database: process.env.POSTGRES_DB,
+    password: process.env.POSTGRES_PASSWORD,
+    host: process.env.POSTGRES_HOST,
+    migrationsRun: false,
+    entities: [
+        ...WalletEntities,
+        ...UsersEntities
+    ],
+    logging: true,
+    synchronize: true,
+}));

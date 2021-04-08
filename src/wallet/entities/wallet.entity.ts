@@ -38,7 +38,7 @@ export class Wallet extends BaseEntity {
   logs: LogWallet;
 
   @ManyToOne(() => User, {
-    onDelete: 'CASCADE' // удаляем кошелек привязанный к юзеру, но не лог кошелька
+    onDelete: 'CASCADE' // удаляем кошелек, что был привязан к юзеру, но не лог кошелька
   })
   public user: number;
 

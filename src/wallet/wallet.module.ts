@@ -4,6 +4,7 @@ import { WalletEntities } from './entities';
 import { WalletService } from './wallet.service';
 
 import { WalletController } from './wallet.controller';
+import {ConfigService} from "@nestjs/config";
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { WalletController } from './wallet.controller';
     }),
     TypeOrmModule.forFeature([...WalletEntities]),
   ],
-  providers: [WalletService],
+  providers: [WalletService, ConfigService],
   controllers: [WalletController],
   exports: [WalletService],
 })
