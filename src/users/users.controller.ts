@@ -1,7 +1,5 @@
- import {BadRequestException, Body, Controller, Delete, Get, Post, Query, Req} from '@nestjs/common';
-import {classToPlain} from 'class-transformer';
+import {Body, Controller, Delete, Get, Post, Query, Req} from '@nestjs/common';
 import { UsersService } from './users.service';
-import {  ReqData } from '../shared/decorators';
 import {UserDTO} from "./dto/user.dto";
 
 @Controller('api/users')
@@ -21,7 +19,6 @@ export class UsersController {
     return await this.usersService.getUsers();
   }
 
-
   /**
    * @api {get} /api/users/:id Get user
    * @apiName GetUsers
@@ -30,7 +27,7 @@ export class UsersController {
    * @apiSuccess {object[]} users
    */
   @Get(':id')
-  async getUserById(@ReqData('id') id: number) {
+  async getUserById(@Query('id') id: number) {
     return await this.usersService.getUserById(id);
   }
 
@@ -46,7 +43,7 @@ export class UsersController {
    * @apiSuccess {number} -.id
    */
   @Post('')
-  async createUser(@ReqData() user: UserDTO) {
+  async createUser(@Body() user: UserDTO) {
     const {id} = await this.usersService.createUser(user);
     return {id};
   }
@@ -59,7 +56,7 @@ export class UsersController {
    * @apiParam (query string) {number} id
    */
   @Delete(':id')
-  async removeUserById(@ReqData('id') id: number) {
+  async removeUserById(@Query('id') id: number) {
     await this.usersService.removeUserById(id);
   }
 }

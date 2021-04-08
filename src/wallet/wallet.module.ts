@@ -7,14 +7,7 @@ import { WalletController } from './wallet.controller';
 import {ConfigService} from "@nestjs/config";
 
 @Module({
-  imports: [
-    HttpModule.registerAsync({
-      useFactory: () => ({
-
-      }),
-    }),
-    TypeOrmModule.forFeature([...WalletEntities]),
-  ],
+  imports: [TypeOrmModule.forFeature([...WalletEntities])],
   providers: [WalletService, ConfigService],
   controllers: [WalletController],
   exports: [WalletService],

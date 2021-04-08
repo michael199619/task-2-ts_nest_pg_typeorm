@@ -9,12 +9,11 @@ import {Like, Repository} from 'typeorm';
 import {Currency, LogWallet, Wallet} from './entities';
 import {WalletDto} from './dto/wallet.dto';
 import {CurrencyDto} from './dto/currency.dto';
-import {ConfigService} from "@nestjs/config";
+import {ConfigService} from '@nestjs/config';
 
 @Injectable()
 export class WalletService {
     constructor(
-        private httpService: HttpService,
         @InjectRepository(Wallet)
         private readonly wRepo: Repository<Wallet>,
         @InjectRepository(Currency)
@@ -47,6 +46,16 @@ export class WalletService {
     }
 
     public async createCurrency(currency: CurrencyDto): Promise<Currency> {
+        const res = await this.cRepo.findOne({
+            where: {
+                name: currency.name
+            }
+        });
+
+        if (res) {
+            throw new BadRequestException(`"${currency.name}" is exists`);
+        }
+
         return await this.cRepo.save(currency);
     }
 

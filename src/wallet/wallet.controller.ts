@@ -1,7 +1,5 @@
 import {BadRequestException, Body, Controller, Delete, Get, Post, Query, Req} from '@nestjs/common';
 import { WalletService } from './wallet.service';
-import {ReqData} from "../shared/decorators";
-import {UserDTO} from "../users/dto/user.dto";
 import {WalletDto} from "./dto/wallet.dto";
 import {CurrencyDto} from "./dto/currency.dto";
 import {TransferDto} from "./dto/transfer.dto";
@@ -23,7 +21,7 @@ export class WalletController {
    * @apiSuccess {number} -.id
    */
   @Post('currencyes')
-  async createCurrency(@ReqData() currency: CurrencyDto) {
+  async createCurrency(@Body() currency: CurrencyDto) {
     const {id} = await this.walletsService.createCurrency(currency);
     return {id};
   }
@@ -62,7 +60,7 @@ export class WalletController {
    * @apiSuccess {object[]} wallet
    */
   @Get(':id')
-  async getWalletsByIdUser(@ReqData('id') id: number) {
+  async getWalletsByIdUser(@Query('id') id: number) {
     return await this.walletsService.getWalletsByIdUser(id);
   }
  
@@ -79,7 +77,7 @@ export class WalletController {
    * @apiSuccess {number} -.id
    */
   @Post('')
-  async createWallet(@ReqData() wallet: WalletDto) {
+  async createWallet(@Body() wallet: WalletDto) {
     const {id} = await this.walletsService.createWallet(wallet);
     return {id};
   }
@@ -97,7 +95,7 @@ export class WalletController {
    * @apiSuccess {object} logWallet
    */
   @Post('transfer')
-  async transfer(@ReqData() transfer: TransferDto) {
+  async transfer(@Body() transfer: TransferDto) {
     return await this.walletsService.transfer(transfer);
   }
 }

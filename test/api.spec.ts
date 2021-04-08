@@ -3,11 +3,12 @@ import {UsersController} from '../src/users/users.controller';
 import {UsersService} from '../src/users/users.service';
 import {INestApplication} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
-import {configService} from '../src/config';
 import {UsersModule} from '../src/users/users.module';
 import {WalletModule} from '../src/wallet/wallet.module';
 import * as request from 'supertest';
-import seed from '../src/utils/seed';
+import {AppConfigModule} from "../src/config/config.module";
+import {ConfigModule, ConfigService} from "@nestjs/config";
+import {ConnectionOptions} from "typeorm";
 
 describe('Api', () => {
     let usersController: UsersController;
@@ -17,7 +18,12 @@ describe('Api', () => {
     beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
             imports: [
-                TypeOrmModule.forRoot(configService.getOrmModuleOptions()),
+                AppConfigModule,
+                TypeOrmModule.forRootAsync({
+                    imports: [ConfigModule],
+                    inject: [ConfigService],
+                    useFactory: (configService: ConfigService) => configService.get<ConnectionOptions>('db'),
+                }),
                 UsersModule,
                 WalletModule
             ]
@@ -25,7 +31,6 @@ describe('Api', () => {
 
         app = moduleRef.createNestApplication();
         await app.init();
-        await seed();
     });
 
     let userId: number;

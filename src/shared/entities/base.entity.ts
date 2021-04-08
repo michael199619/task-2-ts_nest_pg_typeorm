@@ -1,8 +1,10 @@
-import { UpdateDateColumn, CreateDateColumn, DeleteDateColumn } from 'typeorm';
+import {UpdateDateColumn, CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn} from 'typeorm';
 import { Exclude } from 'class-transformer';
-import { BaseIdEntity } from './base-id.entity';
 
-export abstract class BaseEntity extends BaseIdEntity {
+export abstract class BaseEntity {
+  @PrimaryGeneratedColumn({ type: 'int', unsigned: true })
+  public id: number;
+
   @CreateDateColumn({ type: 'timestamptz' })
   public readonly createdAt: string;
 
