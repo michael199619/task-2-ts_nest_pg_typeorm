@@ -1,15 +1,11 @@
-import {
-    Injectable,
-    NotFoundException,
-    BadRequestException, HttpService, ForbiddenException,
-} from '@nestjs/common';
-import {getEntityManagerToken, InjectRepository, InjectEntityManager, InjectConnection} from '@nestjs/typeorm';
-import {EntityManager, In, IsNull, Not} from 'typeorm';
-import {Like, Repository} from 'typeorm';
-import {Currency, LogWallet, Wallet} from './entities';
-import {WalletDto} from './dto/wallet.dto';
-import {CurrencyDto} from './dto/currency.dto';
-import {ConfigService} from '@nestjs/config';
+import { Injectable, BadRequestException, ForbiddenException } from '@nestjs/common';
+import { InjectRepository, InjectEntityManager } from '@nestjs/typeorm';
+import { EntityManager, In } from 'typeorm';
+import { Repository } from 'typeorm';
+import { Currency, LogWallet, Wallet } from './entities';
+import { WalletDto } from './dto/wallet.dto';
+import { CurrencyDto } from './dto/currency.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class WalletService {
@@ -23,8 +19,7 @@ export class WalletService {
         @InjectEntityManager()
         private entityManager: EntityManager,
         private configService: ConfigService
-    ) {
-    }
+    ) {}
 
     public async getWalletsByIdUser(userId: number): Promise<Wallet[]> {
         const wallets = await this.entityManager.createQueryBuilder(Wallet, 'wallet')

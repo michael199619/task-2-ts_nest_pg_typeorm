@@ -13,15 +13,13 @@ export async function bootstrap() {
         origin: '*'
     });
 
-    app.useGlobalPipes(
-        new ValidationPipe({
-            transform: true,
-            validateCustomDecorators: true,
-            transformOptions: {
-                excludeExtraneousValues: true
-            }
-        }),
-    );
+    app.useGlobalPipes(new ValidationPipe({
+        transform: true,
+        validateCustomDecorators: true,
+        transformOptions: {
+            excludeExtraneousValues: true
+        }
+    }));
 
     const configService: ConfigService = app.get('ConfigService');
     await app.listen(configService.get<number>('app.port'));

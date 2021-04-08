@@ -1,8 +1,8 @@
-import {BadRequestException, Body, Controller, Delete, Get, Post, Query, Req} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Query} from '@nestjs/common';
 import { WalletService } from './wallet.service';
-import {WalletDto} from "./dto/wallet.dto";
-import {CurrencyDto} from "./dto/currency.dto";
-import {TransferDto} from "./dto/transfer.dto";
+import {WalletDto} from './dto/wallet.dto';
+import {CurrencyDto} from './dto/currency.dto';
+import {TransferDto} from './dto/transfer.dto';
 
 @Controller('api/wallets')
 export class WalletController {
@@ -60,7 +60,7 @@ export class WalletController {
    * @apiSuccess {object[]} wallet
    */
   @Get(':id')
-  async getWalletsByIdUser(@Query('id') id: number) {
+  async getWalletsByIdUser(@Param('id') id: number) {
     return await this.walletsService.getWalletsByIdUser(id);
   }
  

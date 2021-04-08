@@ -1,6 +1,6 @@
-import {Body, Controller, Delete, Get, Post, Query, Req} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Query, Req} from '@nestjs/common';
 import { UsersService } from './users.service';
-import {UserDTO} from "./dto/user.dto";
+import {UserDTO} from './dto/user.dto';
 
 @Controller('api/users')
 export class UsersController {
@@ -27,7 +27,7 @@ export class UsersController {
    * @apiSuccess {object[]} users
    */
   @Get(':id')
-  async getUserById(@Query('id') id: number) {
+  async getUserById(@Param('id') id: number) {
     return await this.usersService.getUserById(id);
   }
 
@@ -56,7 +56,7 @@ export class UsersController {
    * @apiParam (query string) {number} id
    */
   @Delete(':id')
-  async removeUserById(@Query('id') id: number) {
+  async removeUserById(@Param('id') id: number) {
     await this.usersService.removeUserById(id);
   }
 }

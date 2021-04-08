@@ -1,11 +1,7 @@
-import {
-    Injectable,
-    NotFoundException,
-    BadRequestException,
-} from '@nestjs/common';
-import {getEntityManagerToken, InjectRepository, InjectEntityManager, InjectConnection} from '@nestjs/typeorm';
-import {EntityManager, In, IsNull, Not} from 'typeorm';
-import {Like, Repository} from 'typeorm';
+import {Injectable} from '@nestjs/common';
+import { InjectRepository, InjectEntityManager } from '@nestjs/typeorm';
+import {EntityManager} from 'typeorm';
+import {Repository} from 'typeorm';
 import {User} from './entities';
 import {UserDTO} from './dto/user.dto';
 
@@ -19,7 +15,7 @@ export class UsersService {
     ) {
     }
 
-    public async removeUserById(id: number) {
+    public async removeUserById(id: number) : Promise<void> {
         await this.uRepo.delete(id);
     }
 
