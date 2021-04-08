@@ -82,10 +82,18 @@ export class WalletService {
             await queryRunner.commitTransaction();
         } catch (err) {
             await queryRunner.rollbackTransaction();
-            status = false;
+            status = false
         } finally {
             await queryRunner.release();
+        }
+
+        try {
             return await this.lRepo.save({walletToId, walletFromId, sum, commission, status});
+        } catch (err) {
+            // Это исключение важно, есть много путей решений, вот два основных:
+            // мы должны отменить коммит, так как лога по транзакции нет
+            // либо записать ошибку с логом в файл, но при этом ничего не отменяя
+            throw new Error(err);
         }
     }
 }
