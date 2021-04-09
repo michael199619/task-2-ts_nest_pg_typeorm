@@ -10,6 +10,8 @@ $ cp .env.example .env # Update database
 $ yarn install
 ```
 
+### fixtures ./src/db/fixures.ts
+
 ## start
 
 ```bash
@@ -19,12 +21,12 @@ $ yarn start
 Server started at http://localhost:3000/
 
 ## start docker
-
 ```bash
 $ cp .env.example .env
 $ docker-compose up 
 ```
-Server started at http://localhost:3000/
+
+Server started at http://localhost:3000/ \
 Apidoc started at http://localhost:5000/
 
 ## apidoc
@@ -35,18 +37,12 @@ $ npm run apidoc:serve
 ```
 Apidoc started at http://localhost:5000/
 
-## seeds
-```bash
-$ yarn start
-```
-
 ## tests
 ```bash
 $ yarn test
 ```
 
 ## debug
-
 ```bash
 $ npm run debug
 ```

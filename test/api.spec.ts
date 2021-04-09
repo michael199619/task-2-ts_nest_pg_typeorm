@@ -9,6 +9,7 @@ import * as request from 'supertest';
 import {AppConfigModule} from "../src/config/config.module";
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import {ConnectionOptions} from "typeorm";
+import {SeedService} from "../src/db/seed.service";
 
 describe('Api', () => {
     let usersController: UsersController;
@@ -26,7 +27,9 @@ describe('Api', () => {
                 }),
                 UsersModule,
                 WalletModule
-            ]
+            ],
+            providers: [SeedService],
+            exports: [SeedService]
         }).compile();
 
         app = moduleRef.createNestApplication();

@@ -5,7 +5,7 @@ import {WalletModule} from './wallet/wallet.module';
 import {AppConfigModule} from './config/config.module';
 import {ConfigModule, ConfigService} from '@nestjs/config';
 import {ConnectionOptions} from 'typeorm';
-import {SeedService} from './seed.service';
+import {SeedService} from './db/seed.service';
 
 @Module({
     imports: [
